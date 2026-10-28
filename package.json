@@ -1,0 +1,27 @@
+{
+  "name": "blog-admin-panel",
+  "version": "1.0.0",
+  "main": "index.js",
+ "scripts": {
+  "start": "node server.js",
+  "dev": "nodemon server.js",
+  "seed:admin": "node scripts/seedAdmin.js"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "connect-mongo": "^6.0.0",
+    "dotenv": "^18.0.9",
+    "ejs": "^7.0.2",
+    "express": "^5.3.0",
+    "express-session": "^1.19.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^9.11.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

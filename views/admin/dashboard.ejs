@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+</head>
+<body class="bg-light">
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/admin/dashboard">Blog Admin</a>
+      <form action="/logout" method="POST">
+        <button class="btn btn-outline-light btn-sm">Logout</button>
+      </form>
+    </div>
+  </nav>
+
+  <main class="container py-4">
+    <h1 class="h2 mb-4">Dashboard Overview</h1>
+
+    <div class="row g-3 mb-4">
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <p class="text-muted mb-1">Total Users</p>
+            <h2><%= totalUsers %></h2>
+            <a href="/admin/users">Manage users</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <p class="text-muted mb-1">Total Blog Posts</p>
+            <h2><%= totalPosts %></h2>
+            <a href="/admin/posts">Manage posts</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <p class="text-muted mb-1">Administrators</p>
+            <h2><%= totalAdmins %></h2>
+            <a href="/admin/users">Manage roles</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex gap-2 mb-4">
+      <a href="/admin/users" class="btn btn-primary">User Management</a>
+      <a href="/admin/posts" class="btn btn-success">Post Moderation</a>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+      <div class="card-header bg-white">
+        <h2 class="h5 mb-0">Recent Users</h2>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped mb-0">
+          <thead>
+            <tr><th>Name</th><th>Email</th><th>Joined</th></tr>
+          </thead>
+          <tbody>
+            <% recentUsers.forEach(user => { %>
+              <tr>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td><%= user.createdAt.toLocaleDateString() %></td>
+              </tr>
+            <% }) %>
+            <% if (recentUsers.length === 0) { %>
+              <tr><td colspan="3">No users found.</td></tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card shadow-sm">
+      <div class="card-header bg-white">
+        <h2 class="h5 mb-0">Recent Blog Activity</h2>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped mb-0">
+          <thead>
+            <tr><th>Post</th><th>Author</th><th>Date</th></tr>
+          </thead>
+          <tbody>
+            <% recentPosts.forEach(post => { %>
+              <tr>
+                <td><%= post.title %></td>
+                <td><%= post.author ? post.author.name : "Deleted user" %></td>
+                <td><%= post.createdAt.toLocaleDateString() %></td>
+              </tr>
+            <% }) %>
+            <% if (recentPosts.length === 0) { %>
+              <tr><td colspan="3">No recent posts.</td></tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
